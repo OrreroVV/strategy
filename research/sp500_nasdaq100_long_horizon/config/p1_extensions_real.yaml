@@ -1,0 +1,58 @@
+schema_version: 2
+project:
+  name: sp500_nasdaq100_p1_extensions
+  seed: 20261019
+data:
+  csv: data/raw/monthly.csv
+  manifest: data/raw/manifest.json
+  allow_synthetic: false
+  column_mapping: {}
+targets:
+  horizons:
+  - 36
+  - 60
+  - 84
+  - 120
+validation:
+  min_train: 60
+  step_months: 1
+  embargo_months: 0
+  window_months: null
+  holdout_start: '2010-01-31'
+models:
+  names:
+  - historical_mean
+  - ols
+  - ridge
+  - elastic_net
+  ridge_alpha: 10.0
+  elastic_alpha: 0.01
+  elastic_l1_ratio: 0.5
+relative:
+  enabled: true
+extensions:
+  enabled: true
+  phase: development_prequential
+  intervals:
+    min_residuals_80: 60
+    min_disjoint_80: 5
+    min_residuals_95: 120
+    min_disjoint_95: 10
+  ensemble:
+    min_history: 60
+    min_disjoint: 5
+    eta: 0.01
+    rhos:
+    - 0
+    - 0.25
+    - 0.5
+    - 0.75
+    - 1
+  valuation:
+    lambda_value: 1.0
+    reference_window: 120
+    min_pe: 60
+    eps_window: 60
+    min_eps_months: 36
+reporting:
+  output_dir: outputs/p1_extensions_real_runs

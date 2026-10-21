@@ -1,0 +1,91 @@
+schema_version: 2
+project:
+  name: SYNTHETIC_TEST_ONLY_P1_STRATEGY
+  seed: 20261019
+data:
+  csv: data/sample/SYNTHETIC_TEST_ONLY.csv
+  manifest: data/sample/manifest.json
+  allow_synthetic: true
+  column_mapping: {}
+targets:
+  horizons:
+  - 36
+  - 60
+  - 84
+  - 120
+validation:
+  min_train: 60
+  step_months: 12
+  embargo_months: 0
+  window_months: null
+  holdout_start: '2010-01-31'
+models:
+  names:
+  - historical_mean
+  - ols
+  - ridge
+  - elastic_net
+  ridge_alpha: 10.0
+  elastic_alpha: 0.01
+  elastic_l1_ratio: 0.5
+relative:
+  enabled: true
+extensions:
+  enabled: true
+  phase: development_prequential
+  intervals:
+    min_residuals_80: 60
+    min_disjoint_80: 5
+    min_residuals_95: 120
+    min_disjoint_95: 10
+  ensemble:
+    min_history: 60
+    min_disjoint: 5
+    eta: 0.01
+    rhos:
+    - 0
+    - 0.25
+    - 0.5
+    - 0.75
+    - 1
+  valuation:
+    lambda_value: 1.0
+    reference_window: 120
+    min_pe: 60
+    eps_window: 60
+    min_eps_months: 36
+reporting:
+  output_dir: outputs/p1_strategy_synthetic_runs
+portfolio:
+  enabled: true
+  simulation_kind: monthly_index_proxy
+  start: '2010-01-31'
+  end: null
+  initial_capital: 10000.0
+  monthly_contribution: 1000.0
+  cost_bps:
+  - 0
+  - 5
+  - 20
+  - 50
+  strategic_ndx: 0.5
+  tilt_limits:
+  - 0.02
+  - 0.05
+  - 0.1
+  review_months:
+  - 1
+  - 4
+  - 7
+  - 10
+  max_signal_age_months: 3
+  signal_model: ensemble_shrink
+  signal_horizon_months: 60
+  plot_cost_bps: 5
+  plot_tilt_limit: 0.05
+plots:
+  enabled: true
+  horizon_months: 60
+  model_name: ridge
+  cost_bps: 5
+  tilt_limit: 0.05

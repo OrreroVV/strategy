@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "index-forecast-research"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = ["numpy>=2,<3", "pandas>=2.2,<4", "scipy>=1.11,<2", "scikit-learn>=1.5,<2", "matplotlib>=3.8,<4", "PyYAML>=6,<7"]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+cache_dir = "outputs/.pytest_cache"
+addopts = "--basetemp=outputs/test_tmp"
+
+[tool.setuptools.packages.find]
+where = ["src"]

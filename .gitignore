@@ -1,0 +1,58 @@
+# Python environments and build artifacts
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Tool caches and coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+.ipynb_checkpoints/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Local secrets (keep shareable templates)
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Editor and operating system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+~$*
+*.swp
+*.tmp
+
+# Downloaded reference repositories and exploratory scratch files
+.source*/
+_working/
+
+# Research data: retain placeholders and download-source records.
+# Source code, documentation, configs, and data/sample remain versioned.
+/research/*/data/raw/*
+!/research/*/data/raw/.gitkeep
+!/research/*/data/raw/*.url.txt
+/research/*/data/interim/*
+!/research/*/data/interim/.gitkeep
+/research/*/data/processed/*
+!/research/*/data/processed/.gitkeep
+
+# Reproducible run outputs, model weights, and logs
+/research/*/outputs/*
+!/research/*/outputs/.gitkeep
+/research/*/logs/*
+!/research/*/logs/.gitkeep
+*.log

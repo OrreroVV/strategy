@@ -1,0 +1,23 @@
+{
+  "data_kind": "real",
+  "provider": "待提供：实际数据生产方/授权供应商",
+  "url": "待提供：原始下载地址或API标识",
+  "retrieved_at": "待提供：含时区ISO8601时间戳",
+  "license": "待核验：使用与再分发限制",
+  "currency": "USD",
+  "return_type": "gross_total_return",
+  "dividends_reinvested": true,
+  "point_in_time_verified": false,
+  "timezone": "UTC",
+  "sha256": "待提供：实际CSV的SHA-256",
+  "revision_policy": "待核验",
+  "prelaunch_backcast_period": "待核验",
+  "series": {
+    "SPX": {"id": "待核验：供应商总收益序列ID", "definition": "待核验：美元、税前总收益、分红再投资"},
+    "NDX": {"id": "待核验：供应商XNDX总收益序列ID", "definition": "待核验：美元、税前总收益、分红再投资"}
+  },
+  "optional_field_metadata": {
+    "cpi": "待提供：来源、序列、基期、版本、季调定义；若无数据则CSV中不提供该列",
+    "trailing_pe": "待提供：两指数各自供应商、TTM定义、样本范围和历史口径一致性"
+  }
+}

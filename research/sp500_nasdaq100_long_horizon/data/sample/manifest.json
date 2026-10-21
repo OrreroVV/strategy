@@ -1,0 +1,24 @@
+{
+  "data_kind": "synthetic",
+  "provider": "SYNTHETIC_TEST_ONLY",
+  "url": "local:deterministic synthetic generator; no market source",
+  "retrieved_at": "2026-10-19T02:06:52.374131+00:00",
+  "license": "Synthetic fixture generated for testing only",
+  "currency": "USD",
+  "return_type": "gross_total_return",
+  "dividends_reinvested": true,
+  "point_in_time_verified": true,
+  "timezone": "UTC",
+  "seed": 20261019,
+  "sha256": "496f30ff0e7f70e7504266f6eb98aad84e1f867278c94eb43232833a03885b7f",
+  "series": {
+    "SPX": {
+      "id": "SYNTHETIC_SPX",
+      "definition": "Artificial exponential random walk, not market data"
+    },
+    "NDX": {
+      "id": "SYNTHETIC_NDX",
+      "definition": "Artificial exponential random walk, not market data"
+    }
+  }
+}
