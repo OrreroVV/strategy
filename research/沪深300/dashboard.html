@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>沪深300长期估值监测</title><style>
+body{margin:0;background:#f8fafc;color:#0f172a;font-family:"Microsoft YaHei",sans-serif}.wrap{max-width:1180px;margin:auto;padding:28px}
+h1{margin:0 0 6px}.sub{color:#64748b;margin-bottom:24px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}.card{background:white;border:1px solid #e2e8f0;border-radius:12px;padding:18px;box-shadow:0 4px 14px #0f172a0b}.label{font-size:13px;color:#64748b}.value{font-size:27px;font-weight:700;margin:8px 0}.note{font-size:12px;color:#475569}.panel{background:white;border:1px solid #e2e8f0;border-radius:12px;padding:18px;margin-top:18px}img{width:100%;height:auto}.warn{border-left:4px solid #dc2626;background:#fff1f2;padding:12px 16px;margin:18px 0}.signals{font-weight:700;color:#9f1239}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:8px;border-bottom:1px solid #e2e8f0;text-align:right}th:first-child,td:first-child{text-align:left}
+</style></head><body><div class="wrap"><h1>沪深300长期估值监测</h1><div class="sub">数据截止 2026-08-31｜研究模型，不构成投资建议</div>
+<div class="grid"><div class="card"><div class="label">沪深300</div><div class="value">4,625.09</div><div class="note">月末点位</div></div><div class="card"><div class="label">PE-TTM</div><div class="value">14.53</div><div class="note">5年分位 91.7%</div></div><div class="card"><div class="label">10年国债</div><div class="value">1.69%</div><div class="note">月末收益率</div></div><div class="card"><div class="label">ERP proxy</div><div class="value">5.2%</div><div class="note">5年分位 28.3%</div></div><div class="card"><div class="label">动态10%边界</div><div class="value">3,840.21</div><div class="note">Gap 20.4%</div></div></div>
+<div class="warn">当前触发：<span class="signals">无</span>。进入低估区仍可能继续下跌；边界是条件分位，不是价格支撑承诺。</div>
+<div class="panel"><h2>动态估值边界</h2><img src="outputs/figures/01_dynamic_boundaries.png"></div>
+<div class="panel"><h2>ERP与实时百分位</h2><img src="outputs/figures/02_erp_percentile.png"></div>
+<div class="panel"><h2>3年事件回测</h2><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>signal</th>
+      <th>n</th>
+      <th>mean_stock_ann_return</th>
+      <th>mean_ann_excess_return</th>
+      <th>median_max_drawdown</th>
+      <th>prob_fell_20pct</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MVP_combo</td>
+      <td>2</td>
+      <td>10.0%</td>
+      <td>6.9%</td>
+      <td>-14.1%</td>
+      <td>0.0%</td>
+    </tr>
+    <tr>
+      <td>S1_low_pe</td>
+      <td>2</td>
+      <td>10.0%</td>
+      <td>6.9%</td>
+      <td>-14.1%</td>
+      <td>0.0%</td>
+    </tr>
+    <tr>
+      <td>S2_high_erp</td>
+      <td>5</td>
+      <td>6.9%</td>
+      <td>3.7%</td>
+      <td>-15.9%</td>
+      <td>0.0%</td>
+    </tr>
+    <tr>
+      <td>S2_high_erp_10y</td>
+      <td>2</td>
+      <td>10.6%</td>
+      <td>7.5%</td>
+      <td>-13.0%</td>
+      <td>0.0%</td>
+    </tr>
+    <tr>
+      <td>S3_below_dynamic_q10</td>
+      <td>3</td>
+      <td>10.9%</td>
+      <td>7.8%</td>
+      <td>-14.6%</td>
+      <td>0.0%</td>
+    </tr>
+    <tr>
+      <td>S4_quality_adjusted</td>
+      <td>5</td>
+      <td>6.9%</td>
+      <td>3.7%</td>
+      <td>-15.9%</td>
+      <td>0.0%</td>
+    </tr>
+  </tbody>
+</table></div>
+<div class="panel"><h2>下行风险</h2><img src="outputs/figures/04_downside_risk.png"></div>
+<div class="panel"><h2>股债财富比较</h2><img src="outputs/figures/05_stock_bond_wealth.png"></div>
+</div></body></html>

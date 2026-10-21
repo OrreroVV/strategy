@@ -1,0 +1,96 @@
+schema_version: 1
+document_type: implementation_status_and_design
+as_of: '2026-10-19'
+runtime_config: false
+algorithm_implementation_status: partially_implemented
+real_data_status: missing
+baseline_regression_tests: 36
+notes:
+  - 本文件是实施与验收清单，不能传入当前CLI作为运行配置。
+  - 测试ID定义见validation_protocol.md；已执行范围见p1_foundation_delivery.md、p1_extensions_delivery.md、p1_strategy_delivery.md，未实现模块不得计为通过。
+  - blocked_data描述真实研究验收，合成工程实现可依赖任务顺序继续。
+tasks:
+  - id: P1-01
+    name: 数据可得性与版本接口
+    status: partially_implemented
+    depends_on: []
+    proposed_modules: [feature_registry.py, point_in_time.py, splits.py, prediction_ledger.py]
+    acceptance_tests: [PIT-01, PIT-02, SPL-01, SPL-02, REG-01]
+    implemented_scope: 字段as-of、特征注册、公布可得时间与purge、相对预测日志
+    pending_scope: 嵌套切分与参数选择、最终冻结审计、交易日映射、外部宏观特征接入
+    real_validation: blocked_data
+  - id: P1-02
+    name: 相对收益双路径
+    status: implemented_synthetic_verified
+    depends_on: [P1-01]
+    proposed_modules: [models/relative.py, evaluation.py]
+    acceptance_tests: [REL-01, REL-02, REG-01]
+    implemented_scope: 固定参数基准与三线性模型、共同样本双路径、误差和符号冲突报告
+    pending_scope: 配对误差的预测区间由P1-04提供
+    real_validation: blocked_data
+  - id: P1-03
+    name: 收益分解与估值收缩
+    status: partially_implemented
+    depends_on: [P1-01]
+    proposed_modules: [models/valuation.py]
+    acceptance_tests: [VAL-01, VAL-02, SPL-01]
+    implemented_scope: 固定lambda的历史EPS与股息/估值近似分解、字段可得性与定义校验、缺口诊断
+    pending_scope: lambda/参考窗口内层选择、估值分位特征、真实数据复核
+    real_validation: blocked_data
+  - id: P1-04
+    name: 预测区间及依赖稳健评价
+    status: partially_implemented
+    depends_on: [P1-01, P1-02]
+    proposed_modules: [uncertainty.py]
+    acceptance_tests: [INT-01, INT-02, REL-02, AUD-01]
+    implemented_scope: 成熟OOF误差经验分位区间、单位转换、缺口门槛、覆盖率与可用率审计
+    pending_scope: HAC/区块自助推断、严格最终冻结审计、真实区间覆盖验证
+    real_validation: blocked_data
+  - id: P1-05
+    name: 等权与收缩集成
+    status: implemented_synthetic_verified_development_only
+    depends_on: [P1-04]
+    proposed_modules: [models/ensemble.py]
+    acceptance_tests: [ENS-01, ENS-02, INT-01]
+    implemented_scope: 等权、非负惩罚权重、基于过去prequential集成误差的rho选择及显式回退
+    pending_scope: 真正最终冻结评估和敏感性研究
+    real_validation: blocked_data
+  - id: P1-06
+    name: 策略与现金流账本
+    status: implemented_synthetic_verified_index_proxy
+    depends_on: [P1-02, P1-04, P1-05]
+    proposed_modules: [portfolio.py]
+    acceptance_tests: [PORT-01, PORT-02, PORT-03]
+    implemented_scope: 两类资金流、五策略、成本/倾斜情景、TWR/XIRR、严格信号延迟、资金守恒及右删失回撤
+    pending_scope: 真实可交易产品、真实执行价格/规则/费用/税费/流动性核验
+    real_validation: blocked_data
+  - id: P1-07
+    name: 图表报告与发布状态
+    status: partially_implemented
+    depends_on: [P1-03, P1-06]
+    proposed_modules: [reporting/plots.py, reporting/tables.py, cli.py]
+    acceptance_tests: [AUD-01, AUD-02, REG-01]
+    implemented_scope: 八类静态图、源表及哈希、合成标记、缺图原因、模块化Markdown报告
+    pending_scope: 完整历史价格对照、估值分位/收益分解图的可靠数据及实现、真实当前预测发布门禁
+    real_validation: blocked_data
+  - id: P2-01
+    name: 有限搜索Random Forest与消融
+    status: designed
+    depends_on: [P1-07]
+    proposed_modules: [models/machine_learning.py]
+    acceptance_tests: [ML-01, AUD-01, AUD-02, REG-01]
+    real_validation: blocked_data
+  - id: P2-02
+    name: 可选XGBoost
+    status: deferred
+    depends_on: [P2-01]
+    proposed_modules: []
+    acceptance_tests: [ML-01, AUD-01]
+    real_validation: blocked_data
+  - id: P2-03
+    name: 状态模型与QDII扩展
+    status: deferred
+    depends_on: [P2-01]
+    proposed_modules: []
+    acceptance_tests: [PIT-01, PORT-01, PORT-03, AUD-02]
+    real_validation: blocked_data

@@ -1,0 +1,23 @@
+project:
+  name: SYNTHETIC_TEST_ONLY
+  seed: 20261019
+data:
+  csv: data/sample/SYNTHETIC_TEST_ONLY.csv
+  manifest: data/sample/manifest.json
+  allow_synthetic: true
+  column_mapping: {}
+targets:
+  horizons: [36, 60, 84, 120]
+validation:
+  min_train: 60
+  step_months: 12
+  embargo_months: 0
+  window_months: null
+  holdout_start: '2010-01-31'
+models:
+  names: [historical_mean, ols, ridge, elastic_net]
+  ridge_alpha: 10.0
+  elastic_alpha: 0.01
+  elastic_l1_ratio: 0.5
+reporting:
+  output_dir: outputs/synthetic_runs
